@@ -35,11 +35,7 @@ export class InventoryComponent implements OnInit {
   }
 
   deleteStock(key) {
-    let option = confirm('Do you really want to delete this stock?');
-    
-    if(option) {
       this.dataService.deleteCurrentStock(key);
-    }
   }
 
 }
