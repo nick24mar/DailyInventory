@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        <span class="arrow-back">
+          <a routerLink="/">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            Home
+          </a>
+        </span>
+        <p class="card-header-text">Inventory</p>
+      </div>
+      <div class="card-body">
+        <h4 class="card-titlbe text-center" style="margin-bottom: 12px;">
+          <i class="fa fa-archive" aria-hidden="true"></i>
+          Available Stock
+        </h4>
+
+        <div *ngIf="isStockEmpty" class="text-center alert alert-info">
+          <p>
+            Stocks are empty.
+            <a routerLink="/add-stock" class="btn-link">Add stock.</a>
+          </p>
+        </div>
+
+        <div *ngIf="stockIsLoading && !isStockEmpty" class="text-center">
+          <p>Loading stocks...</p>
+        </div>
+
+
+        <table *ngIf="!stockIsLoading && !isStockEmpty" class="table table-hover table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Balot</th>
+              <th>Pinoy</th>
+              <th>Pakal</th>
+              <th>Abnoy</th>
+              <th><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; Date Added</th>
+              <th><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stock of stocks | async">
+              <td>
+                {{ stock.balotPcs }} Pcs
+              </td>
+              <td>
+                {{ stock.pinoyPcs }} Pcs
+              </td>
+              <td>
+                {{ stock.pakalPcs }} Pcs
+              </td>
+              <td>
+                {{ stock.abnoyPcs }} Pcs
+              </td>
+              <td>
+                {{ stock.timestamp | date:'mediumDate' }}
+              </td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="deleteStock(stock.$key)">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i> &nbsp; Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

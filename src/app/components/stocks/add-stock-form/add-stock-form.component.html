@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        <span class="arrow-back">
+          <a routerLink="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> Home</a>
+        </span>
+
+        <p class="card-header-text">Add Stock</p>
+      </div>
+      <div class="card-body">
+
+        <form class="container" #addStockForm="ngForm" (ngSubmit)="addStock(addStockForm)">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="balotPieces">Add Stock for Balot</label>
+              <input type="number" 
+                      name="balotPcs"
+                      ngModel
+                      #BalotPcs="ngModel"
+                      class="form-control" 
+                      id="balotPieces" 
+                      placeholder="Add balot pcs." 
+                      min="0"
+                      required
+              >
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="pinoyPieces">Add Stock for Pinoy</label>
+              <input type="number" 
+                    name="pinoyPcs"
+                    ngModel
+                    #PinoyPcs="ngModel"
+                    class="form-control" 
+                    id="pinoyPieces" 
+                    placeholder="Add pinoy pcs." 
+                    min="0"
+                    required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="pakalPieces">Add Stock for Pakal</label>
+              <input type="number" 
+                    name="pakalPcs"
+                    ngModel
+                    #PakalPcs="ngModel"
+                    class="form-control" 
+                    id="pakalPieces" 
+                    placeholder="Add pakal pcs." 
+                    min="0"
+                    required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="abnoyPieces">Add Stock for Abnoy</label>
+              <input type="number" 
+                    name="abnoyPcs"
+                    ngModel
+                    #AbnoyPcs="ngModel"
+                    class="form-control" 
+                    id="abnoyPieces" 
+                    placeholder="Add abnoy pcs." 
+                    min="0"
+                    required>
+            </div>
+          </div>
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isSuccess">
+            <button type="button" class="close" (click)="isSuccess = false">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Success!</strong> New Stock added.
+            <a routerLink="/inventory" class="btn-link">View Inventory now.</a>
+          </div>
+
+          <div class="text-center">
+            <label class="custom-control custom-checkbox" title="Check this if it is per tray">
+              <input type="checkbox"
+                name="isPerTray"
+                ngModel
+                #isPerTray="ngModel"
+               class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Per tray</span>
+            </label>
+
+            {{ addStockForm.value | json }}
+
+            <button class="btn btn-primary btn-sm" [disabled]="addStockForm.invalid" type="submit">Add Stock</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
